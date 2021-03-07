@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.carrier.app.mapper.AppVersionInfoMapper">
+  <resultMap id="BaseResultMap" type="com.sam.springmvc.entity.AppVersionInfo">
+    <!--
+      WARNING - @mbg.generated
+      <result column="v数据库列名" jdbcType="数据库字段类型" property="类对应名" />
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="version_code" jdbcType="VARCHAR" property="versionCode" />
+    <result column="terminal_type" jdbcType="VARCHAR" property="terminalType" />
+    <result column="download_url" jdbcType="VARCHAR" property="downloadUrl" />
+    <result column="update_description" jdbcType="VARCHAR" property="updateDescription" />
+    <result column="is_mandatory" jdbcType="BIT" property="isMandatory" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+    <result column="is_published" jdbcType="BIT" property="isPublished" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+  </resultMap>
+  <select id="selectAvailableVersion" resultMap="BaseResultMap">
+    select
+        version_code, terminal_type, download_url, update_description, is_mandatory, is_deleted, is_published, create_time, update_time, create_by
+    from app_version_info where is_deleted=0 and is_published=1 and terminal_type = #{terminal_type,jdbcType=VARCHAR}
+  </select>
+</mapper>
